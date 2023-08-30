@@ -20,7 +20,7 @@ function Navbar() {
         <input
           type="text"
           placeholder="Type to search"
-          className=" outline-none border-none p-1 w-4/6 text-gray-300 placeholder-gray-700"
+          className=" outline-none border-none p-1 w-full text-gray-300 placeholder-gray-700"
         />
       </div>
       <div className=" flex items-center justify-between gap-3">
