@@ -1,6 +1,6 @@
 "use client";
 
-import  { dataSourceTableColumns } from "./table";
+import  { DataSource, dataSourceTableColumns } from "./table";
 
 import React, { useState } from "react";
 import Table from "./table";
@@ -37,12 +37,13 @@ function Card({ selectedDataSource }: { selectedDataSource: any }) {
           />
         </div>
         <select
-  value={sortColumn}
+  value={sortColumn as any}
   onChange={(e) => setSortColumn(e.target.value)}
   className="rounded-lg border bg-white border-gray-300 hover:bg-gray-200 p-2 pl-3 pr-3 flex items-center justify-center gap-2"
 >
   <option value="">Sort by...</option>
-  {dataSourceTableColumns[selectedDataSource].map(column => (
+  
+  {dataSourceTableColumns[selectedDataSource as DataSource].map(column => (
     <option key={column.key} value={column.key}>
       {column.label}
     </option>
@@ -51,7 +52,7 @@ function Card({ selectedDataSource }: { selectedDataSource: any }) {
 
 <select
   value={sortDirection}
-  onChange={(e) => setSortDirection(e.target.value)}
+  onChange={(e) => setSortDirection(e.target.value as any)}
   className="rounded-lg border bg-white border-gray-300 hover:bg-gray-200 p-2 pl-3 pr-3 flex items-center justify-center gap-2"
 
 >

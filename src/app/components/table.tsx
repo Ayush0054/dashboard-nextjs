@@ -82,9 +82,9 @@ function Table({ selectedDataSource ,sortDirection , sortColumn }:{selectedDataS
 
  const  tableColumns = dataSourceTableColumns[selectedDataSource as DataSource];
 
-  console.log('selectedDataSource:', selectedDataSource);
-  console.log('dataSourceTableColumns:', dataSourceTableColumns);
-  console.log('tableColumns:', tableColumns);
+  // console.log('selectedDataSource:', selectedDataSource);
+  // console.log('dataSourceTableColumns:', dataSourceTableColumns);
+  // console.log('tableColumns:', tableColumns);
 
 
   if (!tableColumns) {
