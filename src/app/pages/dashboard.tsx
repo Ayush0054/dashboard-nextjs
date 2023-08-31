@@ -6,15 +6,23 @@ import Header from '../components/header'
 import Card from '../components/card'
 import { DataSource } from '../components/table';
 import Footer from '../components/footer';
-
+import { useRouter } from "next/navigation";
+import { signIn, signOut, useSession } from "next-auth/react";
+import SigninButton from '../components/siginButton';
 function Dashboard() {
+  const { push } = useRouter();
+  const { data: session } = useSession();
     const [selectedDataSource, setSelectedDataSource] = useState<DataSource>(DataSource.Users);
 
     const handleDataSourceChange = (dataSource: DataSource) => {
         setSelectedDataSource(dataSource);
       };
+
   return (
     <div>
+      { session ?
+        <div>
+
         <Navbar />
         
 
@@ -29,6 +37,9 @@ function Dashboard() {
         
         <Footer />
       </div>
+        </div> :
+        <div> <SigninButton/>  </div>
+      }
         
     </div>
   )

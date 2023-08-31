@@ -1,13 +1,15 @@
 "use client";
-import React from "react";
+import React, { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
 const SigninButton = () => {
   const { push } = useRouter();
   const { data: session } = useSession();
-  const handleClick = (event) => {
+  const handleClick = (event: FormEvent) => {
     event.preventDefault();
+    
     signIn();
+  
   };
 
   return (
