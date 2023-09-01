@@ -110,13 +110,25 @@ const live = async() =>{
   const channel = await subscribeToChannel(channelName);
 
   
-  channel.listen('message', (messageData: any) => {
-    if (messageData.action === 'updateData') {
-     
-         
-      setData(messageData.data);
+ 
+channel.listen('message', (messageData: any) => {
+  if (messageData.action === 'updateData') {
+    let jsonData;
+    
+    // Check if data is already an object or needs parsing
+    if(typeof messageData.data === "object") {
+      jsonData = messageData.data;
+    } else {
+      try{
+        jsonData = JSON.parse(messageData.data);
+      } catch(error) {
+        console.error("Error parsing message data:", error);
+      }
     }
-  });
+
+    setData(jsonData);
+  }
+});
   return () => {
 
     channel.unsubscribe();
