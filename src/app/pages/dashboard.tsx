@@ -11,11 +11,12 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import SigninButton from '../components/siginButton';
 function Dashboard() {
   const { push } = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
     const [selectedDataSource, setSelectedDataSource] = useState<DataSource>(DataSource.Users);
     const [showSidebar, setShowSidebar] = useState(true);
 
-    // Add an event listener to detect screen width changes.
+
+    //responsive
     useEffect(() => {
       function handleResize() {
         if (window.innerWidth < 1024) {
@@ -26,7 +27,7 @@ function Dashboard() {
       }
   
       window.addEventListener("resize", handleResize);
-      handleResize(); // Initialize the state based on current screen width.
+      handleResize();
   
       return () => {
         window.removeEventListener("resize", handleResize);
@@ -38,13 +39,16 @@ function Dashboard() {
 
   return (
     <div>
-      { session ?
+      {status === "loading" ? (
+        // Render a loading indicator while checking the session status
+        <div>Loading...</div>
+      ) : session ?
         <div>
 
         <Navbar showSidebar={showSidebar} setShowSidebar={setShowSidebar}  />
         
 
-      <div className=" flex justify-evenly lg:mt-10 mt-2 ">
+      <div className=" flex justify-evenly lg:mt-10 mt-2 lg:p-0 p-5 ">
       <Sidebar onDataSourceChange={handleDataSourceChange} showSidebar={showSidebar} /> 
         <div className=" grid w-3/4 max-h-[700px] min-h-[650px]">
        <Header  />
