@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { table } from "console";
-import { pieSocket, sendMessage, subscribeToChannel } from "../api/piesocket/piesocket";
+import { pieSocket,  subscribeToChannel } from "../api/piesocket/piesocket";
 //  @ts-ignore
 
 export enum DataSource {
@@ -112,7 +112,8 @@ const live = async() =>{
   
   channel.listen('message', (messageData: any) => {
     if (messageData.action === 'updateData') {
-     
+         console.log(messageData.data);
+         
       setData(messageData.data);
     }
   });
@@ -171,9 +172,9 @@ live();
     return text;
   }
   return (
-    <div className="lg:mt-10 lg:w-full lg:max-h-[700px] ">
+    <div className="lg:mt-10 lg:w-full xl:max-h-[700px] ">
       <div className="overflow-x-auto">
-        <table className="table-auto border-collapse w-full">
+        <table className="md:table-auto md:border-collapse w-full">
           <thead>
             <tr className="border-b border-slate-300 bg-gray-100">
               <th>
@@ -181,7 +182,7 @@ live();
                 <input type="checkbox" />
               </th>
               {tableColumns.map((column) => (
-                <th key={column.key} className="text-xs lg:text-base">
+                <th key={column.key} className="text-xs xl:text-base">
                   {column.label}
                 </th>
               ))}
@@ -203,7 +204,7 @@ live();
                   {tableColumns.map((column) => (
                     <td
                       key={column.key}
-                      className="lg:break-all text-xs lg:text-base"
+                      className="lg:break-all text-xs xl:text-base"
                     >
                       {
                       // @ts-ignore
