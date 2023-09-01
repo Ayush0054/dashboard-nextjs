@@ -130,53 +130,55 @@ function Table({ selectedDataSource ,sortDirection , sortColumn }:{selectedDataS
   }
   return (
   
-    <div className='mt-10 w-full max-h-[700px]'>  
-     
-       <table className="table-auto border-collapse w-full min-h-[300px] ">
+    <div className='lg:mt-10 lg:w-full lg:max-h-[700px] '>  
+    <div className="overflow-x-auto">
+      <table className="table-auto border-collapse w-full">
         <thead>
-        <tr className='border-b border-slate-300 bg-gray-100 '>
-      <th> <input type="checkbox" ></input></th>
+          <tr className='border-b border-slate-300 bg-gray-100'>
+            <th> <input type="checkbox" /></th>
             {tableColumns.map(column => (
-              <th key={column.key}>{column.label}</th>
+              <th key={column.key} className='text-xs lg:text-base'>{column.label}</th>
             ))}
           </tr>
         </thead>
-
-
-<tbody>
-  {data
-    .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-    .map((item: any) => (
-      <tr key={item.id} className='border-b border-slate-300'>
-        <td> <input type="checkbox"></input></td>
-        {tableColumns.map(column => (
-          <td key={column.key} className='break-all'>
-           {column.key.includes('.')
-              ? getNestedPropertyValue(item, column.key)
-              : limitWords(item[column.key], 6)} {/* Limit to 10 words */}
-          </td>
-        ))}
-      </tr>
-    ))}
-</tbody>
+  
+        <tbody>
+          {data
+            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+            .map((item: any) => (
+              <tr key={item.id} className='border-b border-slate-300'>
+                <td> <input type="checkbox" /></td>
+                {tableColumns.map(column => (
+                  <td key={column.key} className='lg:break-all text-xs lg:text-base'>
+                    {column.key.includes('.')
+                      ? getNestedPropertyValue(item, column.key)
+                      : limitWords(item[column.key], 6)} {/* Limit to 10 words */}
+                  </td>
+                ))}
+              </tr>
+            ))}
+        </tbody>
       </table>
-      <div className="flex justify-center mt-4 ">
-    <button
-      className="mr-2 px-2 py-1 border rounded hover:bg-gray-200"
-      onClick={() => setCurrentPage(currentPage - 1)}
-      disabled={currentPage === 1}
-    >
-      Previous
-    </button>
-    <button
-      className="ml-2 px-2 py-1 border rounded hover:bg-gray-200"
-      onClick={() => setCurrentPage(currentPage + 1)}
-      disabled={currentPage === Math.ceil(data.length / itemsPerPage)}
-    >
-      Next
-    </button>
-  </div>
     </div>
+  
+    <div className="flex justify-center mt-4">
+      <button
+        className="mr-2 px-2 py-1 border rounded hover:bg-gray-200 text-xs lg:text-base"
+        onClick={() => setCurrentPage(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
+        Previous
+      </button>
+      <button
+        className="ml-2 px-2 py-1 border rounded hover:bg-gray-200 text-xs lg:text-base"
+        onClick={() => setCurrentPage(currentPage + 1)}
+        disabled={currentPage === Math.ceil(data.length / itemsPerPage)}
+      >
+        Next
+      </button>
+    </div>
+  </div>
+  
   );
 }
 

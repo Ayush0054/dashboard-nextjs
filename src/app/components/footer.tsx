@@ -6,7 +6,7 @@ import { signOut } from 'next-auth/react'
 
 function Footer() {
   return (
-    <div className=' flex justify-between  m-28 '>
+    <div className=' hidden lg:flex lg:justify-between  m-28 '>
       
 
         <div className=" grid gap-4 ">
