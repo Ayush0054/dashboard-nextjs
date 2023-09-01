@@ -112,7 +112,7 @@ const live = async() =>{
   
   channel.listen('message', (messageData: any) => {
     if (messageData.action === 'updateData') {
-         console.log(messageData.data);
+     
          
       setData(messageData.data);
     }
