@@ -23,7 +23,7 @@ function Card({ selectedDataSource }: { selectedDataSource: any }) {
           <input
             type="text"
             placeholder="Type to search"
-            className="outline-none border-none p-1 w-full text-gray-300 placeholder-gray-700"
+            className="outline-none border-none p-1 w-full text-gray-900 placeholder-gray-700"
             value={searchQuery} 
             onChange={handleSearchChange} 
           />
