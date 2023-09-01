@@ -40,7 +40,7 @@ function Dashboard() {
   return (
     <div>
       {status === "loading" ? (
-        // Render a loading indicator while checking the session status
+     
         <div>Loading...</div>
       ) : session ?
         <div>

@@ -66,7 +66,7 @@ function Table({
   sortColumn: any;
   searchQuery: string;
 }) {
-  // const [selectedDataSource, setSelectedDataSource] = useState<DataSource>(DataSource.Users);
+
   const [data, setData] = useState<DataItem[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
