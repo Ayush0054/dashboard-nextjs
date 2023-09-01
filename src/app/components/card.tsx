@@ -15,7 +15,7 @@ function Card({ selectedDataSource }: { selectedDataSource: any }) {
     setSearchQuery(event.target.value); 
   };
   return (
-    <div className="bg-[#fcfcfc] p-4 lg:p-8 rounded-xl border border-gray-300 text-xs lg:text-base overflow-x-auto lg:min-h-0 lg:max-h-[700px] min-h-[700px]">
+    <div className="bg-[#fcfcfc] p-4 xl:p-8 rounded-xl border border-gray-300 text-xs xl:text-base overflow-x-auto xl:min-h-0 xl:max-h-[700px] min-h-[700px]">
       <h1 className="font-bold mb-2">Sample data</h1>
       <div className="lg:flex justify-between gap-5">
         <div className="flex items-center border-slate-300 p-1 border-2 w-4/5 rounded-xl hover:border-slate-400">
