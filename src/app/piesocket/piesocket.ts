@@ -2,8 +2,8 @@
 import PieSocket from 'piesocket-js';
 
 export const pieSocket = new PieSocket({
-    clusterId: process.env.PIE_SOCKET_CLUSTER_ID,
-    apiKey: process.env.PIE_SOCKET_API_KEY,
+    clusterId: process.env.NEXT_PUBLIC_PIE_SOCKET_CLUSTER_ID,
+    apiKey: process.env.NEXT_PUBLIC_PIE_SOCKET_API_KEY ,
     notifySelf: true,
   });
 

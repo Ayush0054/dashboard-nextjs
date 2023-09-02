@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { pieSocket,  subscribeToChannel } from "../api/piesocket/piesocket";
+import { pieSocket,  subscribeToChannel } from "../piesocket/piesocket";
 //  @ts-ignore
 
 export enum DataSource {
@@ -124,7 +124,8 @@ channel.listen('message', (messageData: any) => {
         console.error("Error parsing message data:", error);
       }
     }
-
+           console.log(jsonData);
+           
     setData(jsonData);
   }
 });
@@ -201,7 +202,7 @@ live();
           </thead>
 
           <tbody>
-            {data
+            {data ?data
               .slice(
                 (currentPage - 1) * itemsPerPage,
                 currentPage * itemsPerPage
@@ -225,7 +226,7 @@ live();
                     </td>
                   ))}
                 </tr>
-              ))}
+              )) : <div>loading...</div>}
           </tbody>
         </table>
       </div>
