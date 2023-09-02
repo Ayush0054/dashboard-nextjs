@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { pieSocket,  subscribeToChannel } from "../piesocket/piesocket";
+
 //  @ts-ignore
 
 export enum DataSource {
@@ -85,12 +85,7 @@ function Table({
           .toLowerCase()
           .includes(searchQuery.toLowerCase()) //  Filter data based on searchQuery
       );
-      const channelName = `data-update-${selectedDataSource}`;
-        const channel = await subscribeToChannel(channelName);
-        channel.publish('message', {
-          action: 'updateData',
-          data: response.data,
-        });
+     
       setData(filteredData);
    
       } catch (error) {
@@ -101,41 +96,6 @@ function Table({
     fetchData();
 
 
-const live = async() =>{
-
-  const channelName = `data-update-${selectedDataSource}`;
-  
-
-  const channel = await subscribeToChannel(channelName);
-
-  
- 
-channel.listen('message', (messageData: any) => {
-  if (messageData.action === 'updateData') {
-    let jsonData;
-    
-    // Check if data is already an object or needs parsing
-    if(typeof messageData.data === "object") {
-      jsonData = messageData.data;
-    } else {
-      try{
-        jsonData = JSON.parse(messageData.data);
-      } catch(error) {
-        console.error("Error parsing message data:", error);
-      }
-    }
-           console.log(jsonData);
-           
-    setData(jsonData);
-  }
-});
-  return () => {
-
-    channel.unsubscribe();
-  };
-}
-
-live();
    
   }, [selectedDataSource ,searchQuery ]);
 
