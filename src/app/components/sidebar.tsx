@@ -1,4 +1,4 @@
-
+"use client";
 import React from "react";
 import HomeIcon from "./icons/home";
 import BarIcon from "./icons/bar";

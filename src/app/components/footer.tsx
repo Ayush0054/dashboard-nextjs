@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import SettingsIcon from "./icons/settings";
 import LogoutIcon from "./icons/logout";

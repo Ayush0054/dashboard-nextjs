@@ -1,5 +1,6 @@
 
 import React from 'react'
+"use client";
 import ToggleSwitch from './toggleSwitch'
 import { signIn, signOut, useSession } from "next-auth/react";
 function Header() {
