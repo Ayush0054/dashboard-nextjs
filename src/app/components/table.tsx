@@ -1,9 +1,15 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { pieSocket,  subscribeToChannel } from "../piesocket/piesocket";
 //  @ts-ignore
+import PieSocket from "piesocket-js";
 
+
+export const pieSocket = new PieSocket({
+  clusterId: process.env.NEXT_PUBLIC_PIE_SOCKET_CLUSTER_ID,
+  apiKey: process.env.NEXT_PUBLIC_PIE_SOCKET_API_KEY ,
+  notifySelf: true,
+});
 export enum DataSource {
   Users = "users",
   Comments = "comments",
@@ -77,7 +83,7 @@ function Table({
         const response = await axios.get(
           `https://jsonplaceholder.typicode.com/${selectedDataSource}`
         );
-  
+   
         setData(response.data);
         setCurrentPage(1);
         const filteredData = response.data.filter((item: DataItem) =>
@@ -85,12 +91,21 @@ function Table({
           .toLowerCase()
           .includes(searchQuery.toLowerCase()) //  Filter data based on searchQuery
       );
-      const channelName = `data-update-${selectedDataSource}`;
-        const channel = await subscribeToChannel(channelName);
-        channel.publish('message', {
-          action: 'updateData',
-          data: response.data,
-        });
+      
+      const requestData = {
+        channelName: `data-update-${selectedDataSource}`,
+        data: response.data,
+      }; 
+     await axios.post('api/piesocket', requestData)
+      .then((response) => {
+     
+        console.log('Response from server:', response.data);
+      })
+      .catch((error) => {
+
+        console.error('Error:', error);
+      });
+
       setData(filteredData);
    
       } catch (error) {
@@ -101,25 +116,24 @@ function Table({
     fetchData();
 
 
-const live = async() =>{
+
 
   const channelName = `data-update-${selectedDataSource}`;
   
 
-  const channel = await subscribeToChannel(channelName);
+  pieSocket.subscribe(channelName).then((channel:any)=>{
+    console.log("Channel is ready");
 
-  
- 
-channel.listen('message', (messageData: any) => {
-  if (messageData.action === 'updateData') {
+    channel.listen("message", (data:any)=>{
+          if (data.action === 'updateData') {
     let jsonData;
     
-    // Check if data is already an object or needs parsing
-    if(typeof messageData.data === "object") {
-      jsonData = messageData.data;
+  
+    if(typeof data.data === "object") {
+      jsonData =data.data;
     } else {
       try{
-        jsonData = JSON.parse(messageData.data);
+        jsonData = JSON.parse(data.data);
       } catch(error) {
         console.error("Error parsing message data:", error);
       }
@@ -128,15 +142,15 @@ channel.listen('message', (messageData: any) => {
            
     setData(jsonData);
   }
+    });
 });
-  return () => {
 
-    channel.unsubscribe();
-  };
-}
+// async function pub() {
+// const channel = await publishToChannel(channelName,data);
+// }
 
-live();
-   
+// pub();
+
   }, [selectedDataSource ,searchQuery ]);
 
   const tableColumns = dataSourceTableColumns[selectedDataSource as DataSource];

@@ -11,7 +11,7 @@ function Card({ selectedDataSource }: { selectedDataSource: any }) {
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (event:any) => {
     setSearchQuery(event.target.value); 
   };
   return (

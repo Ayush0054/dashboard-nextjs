@@ -8,7 +8,6 @@
 
 ```diff
 - Fork this repository
-  dsvsdvsd
 - install all required libraries by 'npm install' inside folder
 - make .env file and paste this "PIE_SOCKET_CLUSTER_ID=" with cluster id and paste this        
   PIE_SOCKET_API_KEY= with api key  from https://www.piesocket.com/
