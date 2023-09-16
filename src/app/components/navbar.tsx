@@ -17,9 +17,8 @@ function Navbar({ setShowSidebar, showSidebar }: Props) {
   const { data: session } = useSession();
   return (
     <div className=" flex justify-between mb-2 p-2 bg-[#fcfcfc]">
-      <div className=" flex items-center gap-1">
-        <Image src={logo} alt="" />
-        <Image src={saasden} alt="" />
+      <div className=" flex items-center">
+        <Image src={logo} alt="" className=" h-14 w-14" />
       </div>
       <div className=" hidden lg:flex items-center border-slate-300 p-1 border-2 lg:w-4/6 w-1/5 rounded-xl hover:border-slate-400">
         <SearchIcon />
