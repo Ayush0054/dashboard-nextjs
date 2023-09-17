@@ -14,4 +14,4 @@
 - run 'npm run dev' to get started
 ```
 ### screenshots
-![image](image.png)
+![image](image-1.png)
