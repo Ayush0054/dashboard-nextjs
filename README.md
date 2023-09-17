@@ -14,4 +14,4 @@
 - run 'npm run dev' to get started
 ```
 ### screenshots
-![image](<Screenshot from 2023-09-04 23-32-37.png>)
+![Screenshot from 2023-09-18 01-26-05](https://github.com/Ayush0054/dashboard-nextjs/assets/97244608/ca387ca1-41ca-42d4-b7f4-434850fc41a4)
